@@ -101,42 +101,7 @@ class InputActivity : AppCompatActivity() {
             times_button.text = timeString
         }
     }
-/*
-    private fun addTask() {
-        val realm = Realm.getDefaultInstance()
 
-        realm.beginTransaction()
-
-        if (mTask == null) {
-            // 新規作成の場合
-            mTask = Task()
-
-            val taskRealmResults = realm.where(Task::class.java).findAll()
-
-            val identifier: Int =
-                if (taskRealmResults.max("id") != null) {
-                    taskRealmResults.max("id")!!.toInt() + 1
-                } else {
-                    0
-                }
-            mTask!!.id = identifier
-        }
-
-        val title = title_edit_text.text.toString()
-        val content = content_edit_text.text.toString()
-
-        mTask!!.title = title
-        mTask!!.contents = content
-        val calendar = GregorianCalendar(mYear, mMonth, mDay, mHour, mMinute)
-        val date = calendar.time
-        mTask!!.date = date
-
-        realm.copyToRealmOrUpdate(mTask!!)
-        realm.commitTransaction()
-
-        realm.close()
-    }
-    */
     private fun addTask() {
 
         val realm = Realm.getDefaultInstance()
