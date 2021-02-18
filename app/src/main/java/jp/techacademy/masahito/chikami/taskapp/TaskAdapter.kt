@@ -10,7 +10,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class TaskAdapter(context: Context): BaseAdapter() {
-    private val mLayoutInflater: LayoutInflater
+    private val mLayoutInflater: LayoutInflater    //xmlのリソースを取り扱うための仕組みのLayoutInflaterをプロパティとして定義
+
     var mTaskList= mutableListOf<Task>()
 
     init {
