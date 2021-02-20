@@ -1,19 +1,21 @@
 package jp.techacademy.masahito.chikami.taskapp
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import io.realm.Realm
-import kotlinx.android.synthetic.main.activity_main.*
-import io.realm.RealmChangeListener
-import io.realm.Sort
-import android.content.Intent
-import androidx.appcompat.app.AlertDialog
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import io.realm.Realm
+import io.realm.RealmChangeListener
+import io.realm.Sort
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 const val EXTRA_TASK = "jp.techacademy.masahito.chikami.taskapp.TASK"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     private lateinit var mRealm: Realm
     private val mRealmListener = object : RealmChangeListener<Realm> {
         override fun onChange(element: Realm) {
@@ -32,6 +34,20 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        search_button.setOnClickListener {
+            View.OnClickListener {
+                if (category_edit_text.text.isNotEmpty()) {
+                    val taskRealmResults = mRealm.where(Task::class.java)
+                        .equalTo("category", category_edit_text.text.toString()).findAll()
+                        .sort("date", Sort.DESCENDING)
+                    mTaskAdapter.mTaskList = mRealm.copyFromRealm(taskRealmResults)
+                    listView1.adapter = mTaskAdapter
+                    mTaskAdapter.notifyDataSetChanged()
+                } else {
+                    reloadListView()
+                }
+            }
+        }
         // Realmの設定
         mRealm = Realm.getDefaultInstance()
         mRealm.addChangeListener(mRealmListener)
@@ -82,6 +98,7 @@ class MainActivity : AppCompatActivity() {
                 reloadListView()  //onCreateメソッドでreloadListViewメソッドを呼び出す
             }
 
+
             builder.setNegativeButton("CANCEL", null)
 
             val dialog = builder.create()
@@ -107,8 +124,6 @@ class MainActivity : AppCompatActivity() {
         mTaskAdapter.notifyDataSetChanged()
     }
 
-
-
     override fun onDestroy() {
         super.onDestroy()
 
@@ -116,3 +131,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+
+
+
+
