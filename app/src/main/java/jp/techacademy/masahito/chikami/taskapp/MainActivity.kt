@@ -21,10 +21,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private lateinit var mTaskAdapter: TaskAdapter
+    private lateinit var mTaskAdapter: TaskAdapter  //TaskAdapterを保持するプロパティを定義する
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super.onCreate(savedInstanceState)  //onCreateメソッドでTaskAdapterを生成する
         setContentView(R.layout.activity_main)
 
         fab.setOnClickListener { view ->
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                 alarmManager.cancel(resultPendingIntent)
 
 
-                reloadListView()
+                reloadListView()  //onCreateメソッドでreloadListViewメソッドを呼び出す
             }
 
             builder.setNegativeButton("CANCEL", null)
@@ -106,6 +106,8 @@ class MainActivity : AppCompatActivity() {
         // 表示を更新するために、アダプターにデータが変更されたことを知らせる
         mTaskAdapter.notifyDataSetChanged()
     }
+
+
 
     override fun onDestroy() {
         super.onDestroy()

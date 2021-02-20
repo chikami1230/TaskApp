@@ -18,19 +18,19 @@ class TaskAdapter(context: Context): BaseAdapter() {
         this.mLayoutInflater = LayoutInflater.from(context)
     }
 
-    override fun getCount(): Int {
+    override fun getCount(): Int {  //アイテム（データ）の数を返す
         return mTaskList.size
     }
 
-    override fun getItem(position: Int): Any {
+    override fun getItem(position: Int): Any {  //アイテム（データ）を返す
         return mTaskList[position]
     }
 
-    override fun getItemId(position: Int): Long {
+    override fun getItemId(position: Int): Long {  //アイテム（データ）のIDを返す
         return 0
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {  //Viewを返す
         val view: View = convertView ?: mLayoutInflater.inflate(android.R.layout.simple_list_item_2, null)
 
         val textView1 = view.findViewById<TextView>(android.R.id.text1)

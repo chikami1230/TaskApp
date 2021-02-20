@@ -14,6 +14,11 @@ open class Task : RealmObject(), Serializable {
     @PrimaryKey
     var id: Int = 0
 
+    var category: String = "" //TaskクラスにcategoryというStringプロパティを追加
+
+
+
+
 
 
 
