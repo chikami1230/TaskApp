@@ -43,11 +43,15 @@ class MainActivity : AppCompatActivity() {
         search_button.setOnClickListener {
             Log.d("test","2")
             if (category_search_text.text.isNotEmpty()) {
-                val taskRealmResults = mRealm.where(Task::class.java)
-                    .equalTo("category", category_edit_text.text.toString()).findAll()
-                    .sort("date", Sort.DESCENDING)
-                mTaskAdapter.mTaskList = mRealm.copyFromRealm(taskRealmResults)
 
+                val taskRealmResults = mRealm.where(Task::class.java)
+                    .equalTo("category",
+                        category_search_text.text.
+                        toString())
+                    .findAll()
+
+                mTaskAdapter.mTaskList = mRealm.copyFromRealm(taskRealmResults)
+                listView1.adapter = mTaskAdapter
                 mTaskAdapter.notifyDataSetChanged()
                 Log.d("test","1")
             } else {

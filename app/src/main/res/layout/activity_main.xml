@@ -9,41 +9,45 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/category_search_text"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="カテゴリーを入力"/>
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/search_button"
+            <EditText
+                android:id="@+id/category_search_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="カテゴリーを入力"/>
+
+            <Button
+                android:id="@+id/search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="検索"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listView1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="検索"/>
-
+            android:layout_height="match_parent"
+            android:layout_below="@+id/search_button" />
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/listView1"
-        android:paddingTop="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:src="@drawable/plus"
-        app:backgroundTint="@color/colorPrimary"/>
-
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/plus"
+            app:backgroundTint="@color/colorPrimary"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
