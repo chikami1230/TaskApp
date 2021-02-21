@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/category_edit_text"
+            android:id="@+id/category_search_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="カテゴリーを入力"/>
@@ -25,6 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="検索"/>
+
+
     </LinearLayout>
 
     <ListView

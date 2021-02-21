@@ -2,20 +2,24 @@ package jp.techacademy.masahito.chikami.taskapp
 
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.content.Intent
+import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import io.realm.Realm
+import kotlinx.android.synthetic.main.activity_main.*
 import io.realm.RealmChangeListener
 import io.realm.Sort
-import kotlinx.android.synthetic.main.activity_main.*
+import android.content.Intent
+import android.util.Log
+import androidx.appcompat.app.AlertDialog
+import android.view.View
+import kotlinx.android.synthetic.main.content_input.*
 
 
 const val EXTRA_TASK = "jp.techacademy.masahito.chikami.taskapp.TASK"
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
     private lateinit var mRealm: Realm
     private val mRealmListener = object : RealmChangeListener<Realm> {
         override fun onChange(element: Realm) {
@@ -29,25 +33,29 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)  //onCreateメソッドでTaskAdapterを生成する
         setContentView(R.layout.activity_main)
 
+
         fab.setOnClickListener { view ->
             val intent = Intent(this, InputActivity::class.java)
             startActivity(intent)
+            Log.d("test","3")
         }
 
         search_button.setOnClickListener {
-            View.OnClickListener {
-                if (category_edit_text.text.isNotEmpty()) {
-                    val taskRealmResults = mRealm.where(Task::class.java)
-                        .equalTo("category", category_edit_text.text.toString()).findAll()
-                        .sort("date", Sort.DESCENDING)
-                    mTaskAdapter.mTaskList = mRealm.copyFromRealm(taskRealmResults)
-                    listView1.adapter = mTaskAdapter
-                    mTaskAdapter.notifyDataSetChanged()
-                } else {
-                    reloadListView()
-                }
+            Log.d("test","2")
+            if (category_search_text.text.isNotEmpty()) {
+                val taskRealmResults = mRealm.where(Task::class.java)
+                    .equalTo("category", category_edit_text.text.toString()).findAll()
+                    .sort("date", Sort.DESCENDING)
+                mTaskAdapter.mTaskList = mRealm.copyFromRealm(taskRealmResults)
+
+                mTaskAdapter.notifyDataSetChanged()
+                Log.d("test","1")
+            } else {
+                reloadListView()
+                Log.d("test","0")
             }
         }
+
         // Realmの設定
         mRealm = Realm.getDefaultInstance()
         mRealm.addChangeListener(mRealmListener)
